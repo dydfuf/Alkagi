@@ -40,6 +40,10 @@ public class Al {
         return myColor;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public Al(double _x, double _y, int _size, double _xSpeed, double _ySpeed, Color _myColor){
         this.x = _x;
         this.y = _y;

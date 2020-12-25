@@ -26,8 +26,9 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     private boolean move;
     private int clickedX;
     private int clickedY;
+    private boolean canDrag;
 
-    private Vector<Al> Als;
+    private final Vector<Al> Als;
     private Vector<Al> Fallen;
 
     HashMap<String, Integer> queueLine;
@@ -141,8 +142,6 @@ public class AlkagiPanel extends JPanel implements MouseListener,
 
     private void paintAl(Graphics g, Al a){
         if (a == null) return;
-        int dx = (int)a.getX()+8;
-        int dy = (int)a.getY()+8;
         g.setColor(a.getMyColor());
         g.fillOval((int)a.getX(),(int)a.getY(),30,30);
     }
@@ -156,7 +155,8 @@ public class AlkagiPanel extends JPanel implements MouseListener,
 
         // paint the disks
         paintAls(g);
-        paintQueueLine(g);
+        if(canDrag)
+            paintQueueLine(g);
         //if ( aimingQueueBall ) paintQueueLine( g );
     }
 
@@ -180,7 +180,22 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     }
 
  */
+    public Al findClickedAl(int x, int y){
+        for(Al a : Als){
+            int ax = (int)StrictMath.round(a.getX());
+            int ay = (int)StrictMath.round(a.getY());
+            int xDif = Math.abs( ax - x );
+            int yDif = Math.abs( ay - y );
+            int radius = (int)StrictMath.round(a.getSize()/2);
+            if ( xDif <= radius  && yDif <= radius ) {
+                System.out.println(a.getX());
+                System.out.println(a.getY());
+                return a;
+            }
 
+            }
+        return null;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -191,11 +206,17 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     public void mousePressed(MouseEvent e) {
         System.out.println("I clicked at " + e.getPoint());
 
-        this.clickedX = e.getPoint().x;
-        this.clickedY = e.getPoint().y;
-
-
-
+        //this.clickedX = e.getPoint().x;
+        //this.clickedY = e.getPoint().y;
+        Al clickedAl = findClickedAl(e.getPoint().x-15, e.getPoint().y-15);
+        if(clickedAl != null){
+            canDrag = true;
+            this.clickedX = (int)clickedAl.getX()+15;
+            this.clickedY = (int)clickedAl.getY()+15;
+        }
+        else{
+            canDrag = false;
+        }
     }
 
     @Override
