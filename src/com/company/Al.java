@@ -36,8 +36,24 @@ public class Al {
 
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public Color getMyColor() {
         return myColor;
+    }
+
+    public double getxSpeed() {
+        return xSpeed;
+    }
+
+    public double getySpeed() {
+        return ySpeed;
     }
 
     public int getSize() {

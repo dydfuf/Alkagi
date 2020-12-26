@@ -8,15 +8,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Vector;
 
 public class AlkagiPanel extends JPanel implements MouseListener,
         MouseMotionListener,
         Runnable{
 
-    private int WIDTH = 600;
-    private int HEIGHT = 600;
+    private int WIDTH = 700;
+    private int HEIGHT = 700;
 
     //my
     private Al[] alBlack = null;
@@ -27,17 +26,18 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     private int clickedX;
     private int clickedY;
     private boolean canDrag;
+    private Al clickedAl;
+    private boolean turn = true; // 0 : White, 1 : Black
+    private String strTurn = "Black";
 
-    private final Vector<Al> Als;
+    private final Vector<Al> blackAls;
+    private final Vector<Al> whiteAls;
     private Vector<Al> Fallen;
 
     HashMap<String, Integer> queueLine;
 
     GameFrame gameFrame;
-
-    public void setMove(boolean move) {
-        this.move = move;
-    }
+    AlkagiEngine alkagiEngine;
 
     public int getWIDTH() {
         return WIDTH;
@@ -63,8 +63,13 @@ public class AlkagiPanel extends JPanel implements MouseListener,
         return alWhite;
     }
 
+    public String getStrTurn() {
+        return strTurn;
+    }
+
     public AlkagiPanel(GameFrame gameFrame){
         setDoubleBuffered(true);
+
         /*
         try{
             img = ImageIO.read(new File("/Users/choeyonglyeol/Desktop/Alkagi/src/com/company/table.jpg"));
@@ -82,27 +87,20 @@ public class AlkagiPanel extends JPanel implements MouseListener,
         addMouseListener(this);
         addMouseMotionListener(this);
 
-        this.gameFrame = gameFrame;
-
-        this.Als = new Vector<>();
+        this.blackAls = new Vector<>();
+        this.whiteAls = new Vector<>();
         this.Fallen = new Vector<>();
+        this.gameFrame = gameFrame;
+        this.alkagiEngine = new AlkagiEngine(this);
 
-        populateAls();
+        initAls();
+        alkagiEngine.setBlackAls(this.blackAls);
+        alkagiEngine.setWhiteAls(this.whiteAls);
 
-        this.move = true;
-        alBlack = new Al[5];
-        alWhite = new Al[5];
-        alBlack[0] = new Al(10,10,40,0,0, Color.BLACK);
-        alBlack[1] = new Al(20,10,40,0,0, Color.BLACK);
-        alBlack[2] = new Al(30,10,40,0,0, Color.BLACK);
-        alBlack[3] = new Al(40,10,40,0,0, Color.BLACK);
-        alBlack[4] = new Al(50,10,40,0,0, Color.BLACK);
-
-        alWhite[0] = new Al(100,300,40,-1,0, Color.WHITE);
-        alWhite[1] = new Al(130,300,40,0,0, Color.WHITE);
-        alWhite[2] = new Al(280,300,40,0,0, Color.WHITE);
-        alWhite[3] = new Al(430,300,40,0,0, Color.WHITE);
-        alWhite[4] = new Al(580,300,40,0,0, Color.WHITE);
+        //Start the Engine
+        Thread e = new Thread(alkagiEngine);
+        e.setPriority(Thread.NORM_PRIORITY);
+        e.start();
 
         Thread t = new Thread(this);
         t.setPriority(Thread.NORM_PRIORITY);
@@ -110,7 +108,7 @@ public class AlkagiPanel extends JPanel implements MouseListener,
 
     }
 
-    public void populateAls() {
+    public void initAls() {
         Al al;
 
         double midy = 50;
@@ -118,20 +116,33 @@ public class AlkagiPanel extends JPanel implements MouseListener,
 
         // name, Color color, double x, double y, int speed, double direction, int size) {
         al = new Al(firstRow,50,30,0,0,Color.BLACK);
-        Als.add(al);
+        blackAls.add(al);
         al = new Al(firstRow+150,midy,30,0,0,Color.BLACK);
-        Als.add(al);
+        blackAls.add(al);
         al = new Al(firstRow+300,midy,30,0,0,Color.BLACK);
-        Als.add(al);
+        blackAls.add(al);
         al = new Al(firstRow+450,midy,30,0,0,Color.BLACK);
-        Als.add(al);
+        blackAls.add(al);
         al = new Al(firstRow+600,midy,30,0,0,Color.BLACK);
-        Als.add(al);
+        blackAls.add(al);
+
+        al = new Al(firstRow,50+500,30,0,0,Color.WHITE);
+        whiteAls.add(al);
+        al = new Al(firstRow+150,midy+500,30,0,0,Color.WHITE);
+        whiteAls.add(al);
+        al = new Al(firstRow+300,midy+500,30,0,0,Color.WHITE);
+        whiteAls.add(al);
+        al = new Al(firstRow+450,midy+500,30,0,0,Color.WHITE);
+        whiteAls.add(al);
+        al = new Al(firstRow+600,midy+500,30,0,0,Color.WHITE);
+        whiteAls.add(al);
 
     }
     private void paintAls(Graphics g) {
         try {
-            for (Al a : Als)
+            for (Al a : blackAls)
+                paintAl(g,a);
+            for (Al a : whiteAls)
                 paintAl(g,a);
         }
         catch (Exception ex) {
@@ -180,21 +191,54 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     }
 
  */
-    public Al findClickedAl(int x, int y){
-        for(Al a : Als){
+    public void findClickedAl(int x, int y){
+        for(Al a : blackAls){
             int ax = (int)StrictMath.round(a.getX());
             int ay = (int)StrictMath.round(a.getY());
             int xDif = Math.abs( ax - x );
             int yDif = Math.abs( ay - y );
             int radius = (int)StrictMath.round(a.getSize()/2);
             if ( xDif <= radius  && yDif <= radius ) {
-                System.out.println(a.getX());
-                System.out.println(a.getY());
-                return a;
+                if(turn){
+                    System.out.println(a.getX());
+                    System.out.println(a.getY());
+                    this.clickedAl = a;
+                    break;
+                }
+                else{
+                    System.out.println("It is White's Turn!");
+                }
             }
+        }
+        for(Al a : whiteAls){
+            int ax = (int)StrictMath.round(a.getX());
+            int ay = (int)StrictMath.round(a.getY());
+            int xDif = Math.abs( ax - x );
+            int yDif = Math.abs( ay - y );
+            int radius = (int)StrictMath.round(a.getSize()/2);
+            if ( xDif <= radius  && yDif <= radius ) {
+                if(!turn){
+                    System.out.println(a.getX());
+                    System.out.println(a.getY());
+                    this.clickedAl = a;
+                    break;
+                }
+                else{
+                    System.out.println("It is Black's Turn!");
+                }
+            }
+        }
+    }
 
-            }
-        return null;
+    public void toggleTurn(){
+        this.turn = !turn;
+        if(this.turn){
+            strTurn = "Black";
+        }
+        else{
+            strTurn = "White";
+        }
+        gameFrame.setTurnLabel(strTurn);
     }
 
     @Override
@@ -208,11 +252,11 @@ public class AlkagiPanel extends JPanel implements MouseListener,
 
         //this.clickedX = e.getPoint().x;
         //this.clickedY = e.getPoint().y;
-        Al clickedAl = findClickedAl(e.getPoint().x-15, e.getPoint().y-15);
+        findClickedAl(e.getPoint().x-15, e.getPoint().y-15);
         if(clickedAl != null){
             canDrag = true;
-            this.clickedX = (int)clickedAl.getX()+15;
-            this.clickedY = (int)clickedAl.getY()+15;
+            this.clickedX = (int)this.clickedAl.getX()+15;
+            this.clickedY = (int)this.clickedAl.getY()+15;
         }
         else{
             canDrag = false;
@@ -223,7 +267,22 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     public void mouseReleased(MouseEvent e) {
         System.out.println(queueLine.get("x1") + " " + queueLine.get("y1") + " "  +
                 queueLine.get("x2") + " "  + queueLine.get("y2"));
+
+        if(clickedAl != null){
+            double x1 = e.getX();
+            double y1 = e.getY();
+            double x2 = clickedAl.getX()+15;
+            double y2 = clickedAl.getY()+15;
+
+            double dx = (x2 - x1)/10;
+            double dy = (y2 - y1)/10;
+            clickedAl.setxSpeed(dx);
+            clickedAl.setySpeed(dy);
+            toggleTurn();
+        }
+
         queueLine = null;
+        this.clickedAl = null;
     }
 
     @Override

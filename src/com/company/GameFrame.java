@@ -11,6 +11,7 @@ public class GameFrame extends JFrame implements ActionListener {
     public static final int HEIGHT = 700;
 
     AlkagiPanel alkagiPanel;
+    JLabel turnLabel;
     public GameFrame(){
         super();
 
@@ -30,10 +31,12 @@ public class GameFrame extends JFrame implements ActionListener {
         setLocationByPlatform(true);
         buildMenus();
 
-
         alkagiPanel = new AlkagiPanel(this);
         add(alkagiPanel,BorderLayout.CENTER);
         requestFocus();
+
+        turnLabel = new JLabel("turn : " + alkagiPanel.getStrTurn());
+        this.add(turnLabel, BorderLayout.BEFORE_FIRST_LINE);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -119,6 +122,10 @@ public class GameFrame extends JFrame implements ActionListener {
         else
             System.out.println(s);
          */
+    }
+
+    public void setTurnLabel(String string){
+        this.turnLabel.setText("Turn : "+string);
     }
 
 }
