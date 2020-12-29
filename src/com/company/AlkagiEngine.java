@@ -34,14 +34,17 @@ public class AlkagiEngine implements Runnable {
                 System.out.println("a y speed" + a.getySpeed());
                 a.setX(a.getX() + a.getxSpeed());
                 a.setY(a.getY() + a.getySpeed());
+                moveAl(a);
+                /*
                 a.setxSpeed(a.getxSpeed()/1.05);
-                a.setySpeed(a.getySpeed()/1.05);
+                a.setySpeed(a.getySpeed()/1.05);*/
             }
             checkBound(a);
+            /*
             if(a.getxSpeed() < 0.01 && a.getySpeed() < 0.01){
                 a.setxSpeed(0);
                 a.setySpeed(0);
-            }
+            }*/
         }
         for(Al a : whiteAls){
             if(a.getxSpeed() != 0 || a.getySpeed() != 0){
@@ -51,14 +54,17 @@ public class AlkagiEngine implements Runnable {
                 System.out.println("a y speed" + a.getySpeed());
                 a.setX(a.getX() + a.getxSpeed());
                 a.setY(a.getY() + a.getySpeed());
+                moveAl(a);
+                /*
                 a.setxSpeed(a.getxSpeed()/1.05);
-                a.setySpeed(a.getySpeed()/1.05);
+                a.setySpeed(a.getySpeed()/1.05);*/
             }
             checkBound(a);
+            /*
             if(a.getxSpeed() < 0.01 && a.getySpeed() < 0.01){
                 a.setxSpeed(0);
                 a.setySpeed(0);
-            }
+            }*/
 
         }
 
@@ -70,15 +76,19 @@ public class AlkagiEngine implements Runnable {
 
         if(a.getX() > xRight){
             a.setxSpeed(-Math.abs(a.getxSpeed()));
+            a.setDdx(Math.abs(a.getDdx()));
         }
         else if(a.getX() < 0){
             a.setxSpeed(Math.abs(a.getxSpeed()));
+            a.setDdx(-Math.abs(a.getDdx()));
         }
         else if(a.getY() > yBottom ){
             a.setySpeed(-Math.abs(a.getySpeed()));
+            a.setDdy(Math.abs(a.getDdy()));
         }
         else if(a.getY() < 0){
             a.setySpeed(Math.abs(a.getySpeed()));
+            a.setDdy(-Math.abs(a.getDdy()));
         }
     }
 
@@ -104,5 +114,28 @@ public class AlkagiEngine implements Runnable {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    public void moveAl(Al al){
+
+        al.setxSpeed(al.getxSpeed() + al.getDdx());
+        al.setySpeed(al.getySpeed() + al.getDdy());
+
+        if(al.getxSpeed() > 0 == al.getDdx() > 0){
+            al.setxSpeed(0);
+        }
+        if(al.getySpeed() > 0 == al.getDdy() > 0){
+            al.setySpeed(0);
+        }
+    }
+
+    public void setFriction(Al al){
+        double k = (al.getxSpeed() * al.getxSpeed() + al.getySpeed() * al.getySpeed());
+
+        k = Math.sqrt(k) * 50; //  마찰계수 120
+
+        al.setDdx((al.getxSpeed()*(-1)) / k);
+        al.setDdy((al.getySpeed()*(-1)) / k);
+
     }
 }

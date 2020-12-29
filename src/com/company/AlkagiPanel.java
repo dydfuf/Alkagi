@@ -274,10 +274,11 @@ public class AlkagiPanel extends JPanel implements MouseListener,
             double x2 = clickedAl.getX()+15;
             double y2 = clickedAl.getY()+15;
 
-            double dx = (x2 - x1)/10;
-            double dy = (y2 - y1)/10;
+            double dx = (x2 - x1)/40;
+            double dy = (y2 - y1)/40;
             clickedAl.setxSpeed(dx);
             clickedAl.setySpeed(dy);
+            alkagiEngine.setFriction(clickedAl);
             toggleTurn();
         }
 

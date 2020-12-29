@@ -11,6 +11,25 @@ public class Al {
     private int size;
     private double xSpeed = 0;
     private double ySpeed = 0;
+    private double ddx;
+    private double ddy;
+
+    public double getDdx() {
+        return ddx;
+    }
+
+    public void setDdx(double ddx) {
+        this.ddx = ddx;
+    }
+
+    public double getDdy() {
+        return ddy;
+    }
+
+    public void setDdy(double ddy) {
+        this.ddy = ddy;
+    }
+
     private Color myColor;
     private Image img;
 
