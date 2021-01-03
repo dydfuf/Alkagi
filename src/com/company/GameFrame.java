@@ -12,8 +12,8 @@ public class GameFrame extends JFrame implements ActionListener {
 
     AlkagiPanel alkagiPanel;
     JLabel turnLabel;
-    UserPanel userPanel1;
-    UserPanel userPanel2;
+    UserPanel userPanel1, userPanel2;
+    ChatPanel chatPanel;
     MenuPanel menuPanel;
 
     public GameFrame(){
@@ -45,8 +45,12 @@ public class GameFrame extends JFrame implements ActionListener {
         userPanel1.setBounds(700,0,userPanel1.getWIDTH(),userPanel1.getHEIGHT());
         add(userPanel1);
 
+        chatPanel = new ChatPanel();
+        chatPanel.setBounds(700,250,chatPanel.getWIDTH(),chatPanel.getHEIGHT());
+        add(chatPanel);
+
         userPanel2 = new UserPanel();
-        userPanel2.setBounds(700,300,userPanel2.getWIDTH(),userPanel2.getHEIGHT());
+        userPanel2.setBounds(700,350,userPanel2.getWIDTH(),userPanel2.getHEIGHT());
         add(userPanel2);
 
         menuPanel = new MenuPanel();

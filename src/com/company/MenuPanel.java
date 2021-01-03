@@ -19,14 +19,17 @@ public class MenuPanel extends JPanel {
 
     JButton startButton;
     JButton optionButton;
+    JButton infoButton;
 
     public MenuPanel(){
         setBorder(new TitledBorder(new LineBorder(Color.red,1)));
 
         startButton = new JButton("Start");
         optionButton = new JButton("Option");
+        infoButton = new JButton("Info");
 
         add(startButton);
         add(optionButton);
+        add(infoButton);
     }
 }
