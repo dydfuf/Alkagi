@@ -1,7 +1,6 @@
 package com.company;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -23,8 +22,8 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     private Al[] alBlack = null;
     private Al[] alWhite = null;
     private BufferedImage table;
-    private Image img;
-    private boolean move;
+    private ImageIcon imgIconBackground;
+    private ImageIcon imgIconAl;
     private int clickedX;
     private int clickedY;
     private boolean canDrag;
@@ -45,24 +44,8 @@ public class AlkagiPanel extends JPanel implements MouseListener,
         return WIDTH;
     }
 
-    public void setWIDTH(int WIDTH) {
-        this.WIDTH = WIDTH;
-    }
-
     public int getHEIGHT() {
         return HEIGHT;
-    }
-
-    public void setHEIGHT(int HEIGHT) {
-        this.HEIGHT = HEIGHT;
-    }
-
-    public Al[] getAlBlack() {
-        return alBlack;
-    }
-
-    public Al[] getAlWhite() {
-        return alWhite;
     }
 
     public String getStrTurn() {
@@ -72,19 +55,13 @@ public class AlkagiPanel extends JPanel implements MouseListener,
     public AlkagiPanel(GameFrame gameFrame){
         setDoubleBuffered(true);
 
-        /*
-        try{
-            img = ImageIO.read(new File("/Users/choeyonglyeol/Desktop/Alkagi/src/com/company/table.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-         */
+        imgIconBackground = new ImageIcon("./src/res/table.jpg");
+        imgIconAl = new ImageIcon("./src/res/Green_King.png");
 
         //setBackground
         setBackground(new Color (51, 102, 51));
         //setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        //setBorder(new TitledBorder(new LineBorder(Color.red,1)));
         setLayout(null);
 
         //Add mouse listeners
@@ -159,6 +136,7 @@ public class AlkagiPanel extends JPanel implements MouseListener,
         if (a == null) return;
         g.setColor(a.getMyColor());
         g.fillOval((int)a.getX(),(int)a.getY(),30,30);
+        //g.drawImage(imgIconAl.getImage(),(int)a.getX()-5,(int)a.getY()-5,40,40,null);
     }
 
     @Override
@@ -183,18 +161,13 @@ public class AlkagiPanel extends JPanel implements MouseListener,
                 (Integer) queueLine.get("x2"),
                 (Integer) queueLine.get("y2"));
     }
-/*
+
     @Override
     protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        alWhite[0].update();
-        for(int i = 0; i < 5; i++){
-            alBlack[i].draw(g);
-            alWhite[i].draw(g);
-        }
+        g.drawImage(imgIconBackground.getImage(),0,0,700,700,null);
     }
 
- */
+
     public void findClickedAl(int x, int y){
         for(Al a : blackAls){
             int ax = (int)StrictMath.round(a.getX());

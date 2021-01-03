@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,6 @@ public class Al {
     }
 
     private Color myColor;
-    private Image img;
 
     private Point center;
 
@@ -89,12 +89,8 @@ public class Al {
         this.center = new Point();
         this.center.setLocation(_x,_y);
 
-        try{
-            img = ImageIO.read(new File("/Users/choeyonglyeol/Desktop/Alkagi/src/com/company/Green_King.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
+
 
     public void update() {
         x = x + xSpeed;
@@ -112,6 +108,5 @@ public class Al {
     public void draw (Graphics g){
         g.setColor(myColor);
         g.fillOval((int)x, (int)y, size, size);
-        //g.drawImage(img,(int)x,(int)y,size*3,size*3,null);
     }
 }

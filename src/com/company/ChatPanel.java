@@ -20,8 +20,8 @@ public class ChatPanel extends JPanel {
     JLabel chat;
 
     public ChatPanel(){
-        setBorder(new TitledBorder(new LineBorder(Color.red,1)));
-
+        //setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        setBackground(Color.yellow);
         chat = new JLabel("this is Chat");
 
         add(chat);

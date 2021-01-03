@@ -23,7 +23,8 @@ public class UserPanel extends JPanel {
 
     public UserPanel(){
         setLayout(null);
-        setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        //setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        setBackground(Color.green);
 
         userName = new JLabel("UserName");
         userName.setBounds(110,35,190,30);

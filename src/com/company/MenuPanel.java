@@ -22,7 +22,8 @@ public class MenuPanel extends JPanel {
     JButton infoButton;
 
     public MenuPanel(){
-        setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        //setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        setBackground(Color.lightGray);
 
         startButton = new JButton("Start");
         optionButton = new JButton("Option");
