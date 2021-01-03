@@ -26,7 +26,7 @@ public class AlkagiEngine implements Runnable {
     }
 
     public void calcPositions() {
-        
+
         int i, j;
         Al black, black2, white, white2;
 
@@ -145,7 +145,7 @@ public class AlkagiEngine implements Runnable {
             a.setxSpeed(-Math.abs(a.getxSpeed()));
             a.setDdx(Math.abs(a.getDdx()));
         }
-        else if(a.getX() < 0){
+        else if(a.getX() < -15){
             a.setxSpeed(Math.abs(a.getxSpeed()));
             a.setDdx(-Math.abs(a.getDdx()));
         }
@@ -153,7 +153,7 @@ public class AlkagiEngine implements Runnable {
             a.setySpeed(-Math.abs(a.getySpeed()));
             a.setDdy(Math.abs(a.getDdy()));
         }
-        else if(a.getY() < 0){
+        else if(a.getY() < -15){
             a.setySpeed(Math.abs(a.getySpeed()));
             a.setDdy(-Math.abs(a.getDdy()));
         }

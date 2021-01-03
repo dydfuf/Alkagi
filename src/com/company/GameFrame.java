@@ -7,11 +7,15 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class GameFrame extends JFrame implements ActionListener {
-    public static final int WIDTH = 700;
-    public static final int HEIGHT = 700;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 750;
 
     AlkagiPanel alkagiPanel;
     JLabel turnLabel;
+    UserPanel userPanel1;
+    UserPanel userPanel2;
+    MenuPanel menuPanel;
+
     public GameFrame(){
         super();
 
@@ -24,7 +28,7 @@ public class GameFrame extends JFrame implements ActionListener {
 
         setTitle("Alkagi");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        //setLayout(new BorderLayout());
 
         setSize(WIDTH, HEIGHT);
         setResizable( false );
@@ -32,7 +36,23 @@ public class GameFrame extends JFrame implements ActionListener {
         buildMenus();
 
         alkagiPanel = new AlkagiPanel(this);
-        add(alkagiPanel,BorderLayout.CENTER);
+        //add(alkagiPanel,BorderLayout.CENTER);
+        setLayout(null);
+        alkagiPanel.setBounds(0,0,alkagiPanel.getWIDTH(),alkagiPanel.getHEIGHT());
+        add(alkagiPanel);
+
+        userPanel1 = new UserPanel();
+        userPanel1.setBounds(700,0,userPanel1.getWIDTH(),userPanel1.getHEIGHT());
+        add(userPanel1);
+
+        userPanel2 = new UserPanel();
+        userPanel2.setBounds(700,300,userPanel2.getWIDTH(),userPanel2.getHEIGHT());
+        add(userPanel2);
+
+        menuPanel = new MenuPanel();
+        menuPanel.setBounds(700,600,menuPanel.getWIDTH(),menuPanel.getHEIGHT());
+        add(menuPanel);
+
         requestFocus();
 
         turnLabel = new JLabel("turn : " + alkagiPanel.getStrTurn());

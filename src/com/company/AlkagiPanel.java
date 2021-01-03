@@ -2,6 +2,8 @@ package com.company;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -81,7 +83,9 @@ public class AlkagiPanel extends JPanel implements MouseListener,
 
         //setBackground
         setBackground(new Color (51, 102, 51));
-        setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        //setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+        setLayout(null);
 
         //Add mouse listeners
         addMouseListener(this);
