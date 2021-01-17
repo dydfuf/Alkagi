@@ -102,6 +102,9 @@ class Button:
         if self.mouse == "off":
             self.clicked = False
 
+    def get_clicked(self):
+        return self.click()
+
     def click(self):
         _1, _2, _3 = pygame.mouse.get_pressed()
         mouse_x, mouse_y = pygame.mouse.get_pos()

@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29a27715-b333-4c13-bf3e-6b4201cf7730" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Client/Board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/Button.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/Chat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/Form.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/Game.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/MainMenu.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/Player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Button.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/MainMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/MainMenu.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/MainMenu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="48" column="48" lean-forward="true" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+            <state relative-caret-position="465">
+              <caret line="55" column="36" lean-forward="true" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -59,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/Button.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+            <state relative-caret-position="720">
+              <caret line="105" column="27" selection-start-line="105" selection-start-column="27" selection-end-line="105" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -95,8 +90,8 @@
         <option value="$PROJECT_DIR$/Client/Player.py" />
         <option value="$PROJECT_DIR$/Client/Game.py" />
         <option value="$PROJECT_DIR$/Client/LoginButton.py" />
-        <option value="$PROJECT_DIR$/Client/Button.py" />
         <option value="$PROJECT_DIR$/Client/Form.py" />
+        <option value="$PROJECT_DIR$/Client/Button.py" />
         <option value="$PROJECT_DIR$/Client/MainMenu.py" />
       </list>
     </option>
@@ -258,20 +253,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Client/Board.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/Button.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/Player.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -291,10 +272,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Client/Board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/Button.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="105" column="27" selection-start-line="105" selection-start-column="27" selection-end-line="105" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Client/MainMenu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="48" column="48" lean-forward="true" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+        <state relative-caret-position="465">
+          <caret line="55" column="36" lean-forward="true" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>

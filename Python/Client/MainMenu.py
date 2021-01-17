@@ -16,6 +16,7 @@ class MainMenu:
         self.title_font =  pygame.font.SysFont("comicsans", 120)
         self.enter_font =  pygame.font.SysFont("comicsans", 60)
         self.loginButton = Button("Login", self.WIDTH/2, self.HEIGHT*0.8)
+        self.typing = True
 
     def draw(self):
         self.win.fill(self.BG)
@@ -38,6 +39,7 @@ class MainMenu:
 
         while run:
             clock.tick(60)
+
             self.draw()
 
             for event in pygame.event.get():
@@ -47,17 +49,26 @@ class MainMenu:
                     quit()
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        if len(self.name) > 1:
-                            self.waiting = True
-                            self.typePassword(key_name)
-                    else:
-                        # gets the key name
-                        key_name = pygame.key.name(event.key)
+                    key_name = pygame.key.name(event.key)
+                    # converts to uppercase the key name
+                    # key_name = key_name.lower()
 
-                        # converts to uppercase the key name
-                        key_name = key_name.lower()
-                        self.typeName(key_name)
+                    if self.typing :
+                        if event.key == pygame.K_RETURN:
+                            if len(self.name) > 1:
+                                self.waiting = True
+                                self.typing = False
+                        else:
+                            self.typeName(key_name)
+
+                    else:
+                        self.typePassword(key_name)
+
+            if self.check_button_pressed():
+                print("----submit----")
+                print("Name     : " + self.name)
+                print("Password : " + self.password)
+
 
     def typeName(self, char):
         if char == "backspace":
@@ -67,7 +78,6 @@ class MainMenu:
             self.name += " "
         elif len(char) == 1:
             self.name += char
-            print(char)
         if len(self.name) >= 20:
             self.name = self.name[:20]
 
@@ -79,11 +89,21 @@ class MainMenu:
             self.password += " "
         elif len(char) == 1:
             self.password += char
-            print(char)
         if len(self.password) >= 20:
             self.password = self.password[:20]
+
+    def check_button_pressed(self):
+        return self.loginButton.get_clicked()
+
+
+    def getName(self):
+        return self.name
+
+    def getPassword(self):
+        return self.password
 
 if __name__ == "__main__":
     pygame.font.init()
     main = MainMenu()
     main.run()
+
